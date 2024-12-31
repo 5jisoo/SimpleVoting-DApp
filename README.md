@@ -18,7 +18,7 @@
 - execute migration
 
 ```shell
-$ truffle migrate
+% truffle migrate
 ```
 
 > geth
