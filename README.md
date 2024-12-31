@@ -18,6 +18,7 @@
 - execute migration
 
 ```shell
+% cd SimpleVoting
 % truffle migrate
 ```
 
@@ -28,4 +29,12 @@
 ```shell
 > miner.start()
 > miner.stop()
+```
+
+> terminal
+
+```shell
+% cp SimpleVoting/build/contracts/SimpleVoting.json SimpleVotingWeb/contracts/SimpleVoting.json
+% cd SimpleVotingWeb
+% node webserver.js
 ```
