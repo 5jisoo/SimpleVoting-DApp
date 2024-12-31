@@ -1,4 +1,4 @@
-import { SimpleVoting } from "./setting";
+import { SimpleVoting } from "./setting.js";
 
 function startVotingSession() {
   $("#votingSessionMessage").html("");
@@ -24,7 +24,6 @@ function startVotingSession() {
               SimpleVoting.deployed()
                 .then((instance) =>
                   instance.startVotingSession({
-                    from: adminAddress,
                     gas: 200000,
                   })
                 )
@@ -71,29 +70,6 @@ function endVotingSession() {
         $("#votingSessionMessage").html(
           "The given address does not correspond to the administrator"
         );
-      }
-    });
-}
-
-function loadProposalsTable() {
-  SimpleVoting.deployed()
-    .then((instance) => instance.getProposalsNumber())
-    .then((proposalsNumber) => {
-      var innerHtml =
-        "<tr><td><b>Proposal Id</b></td><td><b>Description</b></td>";
-
-      j = 0;
-      for (var i = 0; i < proposalsNumber; i++) {
-        getProposalDescription(i).then((description) => {
-          innerHtml =
-            innerHtml +
-            "<tr><td>" +
-            j++ +
-            "</td><td>" +
-            description +
-            "</td></tr>";
-          $("#proposalsTable").html(innerHtml);
-        });
       }
     });
 }

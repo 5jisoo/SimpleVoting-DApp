@@ -1,3 +1,7 @@
+import Web3 from "web3";
+import $ from "jquery";
+import TruffleContract from "@truffle/contract";
+
 var SimpleVoting;
 
 var voterRegisteredEvent;
@@ -12,14 +16,18 @@ var workflowStatusChangeEvent;
 
 window.onload = function () {
   // json을 가져온 뒤, 성공적으로 불러오면 두번째 인수로 제공된 콜백 함수 호출
+  console.log("호출됨");
+
   $.getJSON(
-    "../SimpleVoting/build/contracts/SimpleVoting.json",
+    "../../../SimpleVoting/build/contracts/SimpleVoting.json",
     function (json) {
       SimpleVoting = TruffleContract(json); // ABI 및 배포 정보를 포함한 컨트랙트 불러오기
 
       SimpleVoting.setProvider(
         new Web3.providers.HttpProvider("http://localhost:8545")
       );
+
+      console.log("등록");
 
       /**
        * deployed() : 스마트 계약 인스턴스를 가져옴. Promise를 반환함.
@@ -214,6 +222,71 @@ function unlockVoter() {
   var result = web3.personal.unlockAccount(voterAddress, voterPassword, 180); // unlock for 3 minutes
   if (result) $("#voterMessage").html("The account has been unlocked");
   else $("#voterMessage").html("The account has NOT been unlocked");
+}
+
+function loadProposalsTable() {
+  SimpleVoting.deployed()
+    .then((instance) => instance.getProposalsNumber())
+    .then((proposalsNumber) => {
+      var innerHtml =
+        "<tr><td><b>Proposal Id</b></td><td><b>Description</b></td>";
+
+      j = 0;
+      for (var i = 0; i < proposalsNumber; i++) {
+        getProposalDescription(i).then((description) => {
+          innerHtml =
+            innerHtml +
+            "<tr><td>" +
+            j++ +
+            "</td><td>" +
+            description +
+            "</td></tr>";
+          $("#proposalsTable").html(innerHtml);
+        });
+      }
+    });
+}
+
+function loadResultsTable() {
+  SimpleVoting.deployed()
+    .then((instance) => instance.getWorkflowStatus())
+    .then((workflowStatus) => {
+      if (workflowStatus == 5) {
+        var innerHtml = "<tr><td><b>Winning Proposal</b></td><td></td></tr>";
+
+        SimpleVoting.deployed()
+          .then((instance) => instance.getWinningProposalId())
+          .then((winningProposalId) => {
+            innerHtml =
+              innerHtml +
+              "<tr><td><b>Id:</b></td><td>" +
+              winningProposalId +
+              "</td></tr>";
+
+            SimpleVoting.deployed()
+              .then((instance) => instance.getWinningProposalDescription())
+              .then((winningProposalDescription) => {
+                innerHtml =
+                  innerHtml +
+                  "<tr><td><b>Description:</b></td><td>" +
+                  winningProposalDescription +
+                  "</td></tr>";
+
+                SimpleVoting.deployed()
+                  .then((instance) => instance.getWinningProposaVoteCounts())
+                  .then((winningProposalVoteCounts) => {
+                    innerHtml =
+                      innerHtml +
+                      "<tr><td><b>Votes count:</b></td><td>" +
+                      winningProposalVoteCounts +
+                      "</td></tr>";
+
+                    $("#resultsTable").html(innerHtml);
+                  });
+              });
+          });
+      }
+    });
 }
 
 export { SimpleVoting };

@@ -1,4 +1,4 @@
-import { SimpleVoting } from "./setting";
+import { SimpleVoting } from "./setting.js";
 
 function registerVoter() {
   $("#voterRegistrationMessage").html("");
