@@ -1,5 +1,5 @@
-import Web3 from "web3";
 import $ from "jquery";
+import Web3 from "web3";
 import TruffleContract from "@truffle/contract";
 
 var SimpleVoting;
