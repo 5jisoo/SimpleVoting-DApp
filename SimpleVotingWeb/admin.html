@@ -1,15 +1,17 @@
 <html>
-<head>   
-	<script src="bower_components/web3/dist/web3.min.js"></script>
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/truffle-contract/dist/truffle-contract.js"></script>		
-	<script src="./scripts/registerVoter.js"></script>
+<head>
+	<script src="dist/bundle.js"></script>
+	<script type="module" src="../src/setting.js"></script>
+	<script type="module" src="../src/registerVoter.js"></script>
+	<script type="module" src="../src/registerProposal.js"></script>
+	<script type="module" src="../src/vote.js"></script>
+	<script type="module" src="../src/tallyVotes.js"></script>
 </head>
 
 <body>
 	<table>
 		<tr><h1><b>SimpleVoting - Admin</b></h1></tr>
-		<tr/>
+		<tr>
 		<tr>
 			<table border="0" cellpadding="0" id='currentStatus'> 
 				<tr>
@@ -19,9 +21,9 @@
 					<td></td>
 				 </tr>	
 			</table>
-		</tr>	
-		<br/>		
-		<tr/>
+		</tr>
+		<br/>	
+		</tr>
 		<tr>
 			<table border="0" cellpadding="0" id='user'> 
 				<tr>
