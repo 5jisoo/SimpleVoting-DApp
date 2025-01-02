@@ -116,7 +116,7 @@ contract SimpleVoting {
         emit WorkflowStatusChangeEvent(WorkflowStatus.RegisteringVoters, workflowStatus);
     }
 
-    function endProposalsRegistration() public onlyAdmin onlyDuringVotersRegistration {
+    function endProposalsRegistration() public onlyAdmin onlyDuringProposalsRegistration {
         workflowStatus = WorkflowStatus.ProposalsRegistrationEnded;
         
         emit ProposalsRegistrationEndedEvent();
