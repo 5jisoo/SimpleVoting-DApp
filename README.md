@@ -33,8 +33,14 @@
 
 > terminal
 
+1. copy `json` file to `SimpleVotingWeb` project
+2. move to root folder of `SimpleVotingWeb` project (`/SimpleVotingWeb`)
+3. install npm dependencies
+4. execute web project
+
 ```shell
 % cp SimpleVoting/build/contracts/SimpleVoting.json SimpleVotingWeb/contracts/SimpleVoting.json
 % cd SimpleVotingWeb
+% npm install
 % node webserver.js
 ```
