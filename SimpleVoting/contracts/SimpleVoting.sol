@@ -99,7 +99,7 @@ contract SimpleVoting {
         workflowStatus = WorkflowStatus.RegisteringVoters;
     }
 
-    function registeredVoter(address _voterAddress) public onlyAdmin onlyDuringVotersRegistration{
+    function registerVoter(address _voterAddress) public onlyAdmin onlyDuringVotersRegistration{
         require(!voters[_voterAddress].isRegistered, "the voter is already registered");
 
         voters[_voterAddress].isRegistered = true;
