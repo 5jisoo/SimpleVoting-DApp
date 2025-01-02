@@ -1,9 +1,14 @@
 {
+  "name": "simplevotingweb",
+  "version": "1.0.0",
+  "description": "simple voting dapp web",
+  "main": "index.js",
+  "type": "module",
   "dependencies": {
     "@truffle/contract": "^4.6.31",
-    "connect": "^3.7.0",
+    "express": "^4.21.2",
+    "http": "^0.0.1-security",
     "jquery": "^3.7.1",
-    "serve-static": "^1.16.2",
     "web3": "^0.20.0"
   }
 }

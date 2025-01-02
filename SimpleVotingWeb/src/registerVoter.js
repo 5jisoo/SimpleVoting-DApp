@@ -1,4 +1,15 @@
-import { SimpleVoting } from "./setting.js";
+var SimpleVoting;
+
+window.registerVoter = registerVoter;
+window.checkVoterRegistration = checkVoterRegistration;
+
+$.getJSON("/contracts/SimpleVoting.json", function (json) {
+  SimpleVoting = TruffleContract(json); // ABI 및 배포 정보를 포함한 컨트랙트 불러오기
+
+  SimpleVoting.setProvider(
+    new Web3.providers.HttpProvider("http://localhost:8545")
+  );
+});
 
 function registerVoter() {
   $("#voterRegistrationMessage").html("");
@@ -7,7 +18,7 @@ function registerVoter() {
   var voterToRegister = $("#voterAddress").val();
 
   SimpleVoting.deployed()
-    .then((instance) => instance.isAdministrator(adminAddress))
+    .then((instance) => instance.isAdmin(adminAddress))
     .then((isAdministrator) => {
       // 관리자 권한 확인
       if (isAdministrator) {

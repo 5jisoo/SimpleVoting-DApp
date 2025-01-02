@@ -1,4 +1,17 @@
-import { SimpleVoting } from "./setting.js";
+var SimpleVoting;
+
+window.startVotingSession = startVotingSession;
+window.endVotingSession = endVotingSession;
+window.getProposalDescription = getProposalDescription;
+window.vote = vote;
+
+$.getJSON("/contracts/SimpleVoting.json", function (json) {
+  SimpleVoting = TruffleContract(json); // ABI 및 배포 정보를 포함한 컨트랙트 불러오기
+
+  SimpleVoting.setProvider(
+    new Web3.providers.HttpProvider("http://localhost:8545")
+  );
+});
 
 function startVotingSession() {
   $("#votingSessionMessage").html("");
@@ -6,7 +19,7 @@ function startVotingSession() {
   var adminAddress = $("#adminAddress").val();
 
   SimpleVoting.deployed()
-    .then((instance) => instance.isAdministrator(adminAddress))
+    .then((instance) => instance.isAdmin(adminAddress))
     .then((isAdministrator) => {
       if (isAdministrator) {
         return SimpleVoting.deployed()
@@ -44,7 +57,7 @@ function endVotingSession() {
   var adminAddress = $("#adminAddress").val();
 
   SimpleVoting.deployed()
-    .then((instance) => instance.isAdministrator(adminAddress))
+    .then((instance) => instance.isAdmin(adminAddress))
     .then((isAdministrator) => {
       if (isAdministrator) {
         return SimpleVoting.deployed()
