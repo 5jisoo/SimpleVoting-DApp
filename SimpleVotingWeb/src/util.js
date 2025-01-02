@@ -1,15 +1,5 @@
 var SimpleVoting;
 
-var voterRegisteredEvent;
-var proposalsRegistrationStartedEvent;
-var proposalsRegistrationEndedEvent;
-var proposalRegisteredEvent;
-var votingSessionStartedEvent;
-var votingSessionEndedEvent;
-var votedEvent;
-var votesTalliedEvent;
-var workflowStatusChangeEvent;
-
 const web3 = new Web3();
 web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
 

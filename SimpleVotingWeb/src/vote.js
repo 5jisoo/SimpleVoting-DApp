@@ -37,6 +37,7 @@ function startVotingSession() {
               SimpleVoting.deployed()
                 .then((instance) =>
                   instance.startVotingSession({
+                    from: adminAddress,
                     gas: 200000,
                   })
                 )
