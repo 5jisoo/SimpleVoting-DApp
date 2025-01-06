@@ -1,5 +1,6 @@
-# Simple Voting DApp
+# 🗳️ Simple Voting DApp 🗳️
 
+## Installation
 > terminal
 
 - run geth console
@@ -43,4 +44,29 @@
 % cd SimpleVotingWeb
 % npm install
 % node webserver.js
+```
+
+## project structure
+```
+📦SimpleVoting
+ ┣ 📂contracts
+ ┃ ┗ 📜SimpleVoting.sol
+ ┣ 📂migrations
+ ┃ ┗ 📜1_deploy_contracts.js
+ ┗ 📜truffle-config.js
+📦SimpleVotingWeb
+ ┣ 📂assets
+ ┃ ┣ 📜admin.html
+ ┃ ┗ 📜voter.html
+ ┣ 📂contracts
+ ┃ ┗ 📜SimpleVoting.json
+ ┣ 📂src
+ ┃ ┣ 📜registerProposal.js
+ ┃ ┣ 📜registerVoter.js
+ ┃ ┣ 📜tallyVotes.js
+ ┃ ┣ 📜util.js
+ ┃ ┗ 📜vote.js
+ ┣ 📜index.js
+ ┣ 📜package-lock.json
+ ┗ 📜package.json
 ```
